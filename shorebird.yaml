@@ -1,0 +1,13 @@
+# Shorebird code push (https://docs.shorebird.dev/getting-started)
+#
+# Replace app_id by signing in at https://console.shorebird.dev, installing the
+# Shorebird CLI, then running from this project root:
+#   shorebird login
+#   shorebird init
+#
+# app_id is not secret and should be committed after init.
+
+app_id: "00000000-0000-0000-0000-000000000000"
+
+# Uncomment to disable automatic background updates (then use package:shorebird_code_push).
+# auto_update: false

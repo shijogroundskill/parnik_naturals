@@ -1,0 +1,41 @@
+# Publishes a Shorebird Android patch (OTA) for the latest release.
+# Prerequisites: same as shorebird-release-android.yml, plus a successful prior release.
+name: Shorebird Patch (Android)
+
+on:
+  workflow_dispatch:
+
+env:
+  SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true
+
+      - name: Shorebird Patch
+        id: shorebird-patch
+        uses: shorebirdtech/shorebird-patch@v1
+        with:
+          platform: android
+          release-version: latest
+
+      - name: Patch number
+        run: echo "patch=${{ steps.shorebird-patch.outputs.patch-number }}"
